@@ -56,7 +56,7 @@
    */
   window.addEventListener('keydown', (e) => {
     // A. Hold ALT for Temporary Reveal
-    if (e.key === 'Alt') {
+    if (e.key === 'Alt' || e.code === 'AltLeft' || e.code === 'AltRight') {
       engine.setAltReveal(true);
     }
 
@@ -70,7 +70,7 @@
 
   window.addEventListener('keyup', (e) => {
     // Release ALT when Alt key is released or altKey modifier becomes false
-    if (e.key === 'Alt' || !e.altKey) {
+    if (e.key === 'Alt' || e.code === 'AltLeft' || e.code === 'AltRight' || !e.altKey) {
       engine.setAltReveal(false);
     }
   }, { capture: true });

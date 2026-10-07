@@ -160,15 +160,43 @@ body.wa-privacy-active.wa-privacy-blur-status #main header span[title*="typing" 
    4. REVEAL BEHAVIORS (ALT HOLD & HOVER)
    ========================================================= */
 
-/* Instant Reveal while holding ALT key */
-body.wa-privacy-alt-reveal * {
+/* Zero radius CSS variable override when revealing or inactive */
+:root:has(body.wa-privacy-alt-reveal),
+html.wa-privacy-alt-reveal,
+body.wa-privacy-alt-reveal,
+body:not(.wa-privacy-active) {
+  --wa-privacy-blur-radius: 0px !important;
+}
+
+/* Instant Reveal while holding ALT key (High Specificity overrides for all targets) */
+body.wa-privacy-alt-reveal *,
+body.wa-privacy-alt-reveal #main *,
+body.wa-privacy-alt-reveal #pane-side *,
+body.wa-privacy-alt-reveal header *,
+body.wa-privacy-alt-reveal .wa-privacy-blur-item,
+body.wa-privacy-alt-reveal .wa-privacy-target-msg-text,
+body.wa-privacy-alt-reveal .wa-privacy-target-msg-media,
+body.wa-privacy-alt-reveal .wa-privacy-target-sidebar-name,
+body.wa-privacy-alt-reveal .wa-privacy-target-sidebar-preview,
+body.wa-privacy-alt-reveal .wa-privacy-target-sidebar-time,
+body.wa-privacy-alt-reveal .wa-privacy-target-sidebar-avatar,
+body.wa-privacy-alt-reveal .wa-privacy-target-unread-badge,
+body.wa-privacy-alt-reveal .wa-privacy-target-header-name,
+body.wa-privacy-alt-reveal .wa-privacy-target-header-avatar,
+body.wa-privacy-alt-reveal .wa-privacy-target-header-status {
   filter: none !important;
   opacity: 1 !important;
   visibility: visible !important;
-  transition: filter 0.08s ease-out !important;
+  transition: filter 0.08s ease-out, opacity 0.08s ease-out !important;
 }
 
 /* Hover-to-Reveal (when enabled in settings) */
+body.wa-privacy-hover-reveal-enabled div[role="row"]:hover *,
+body.wa-privacy-hover-reveal-enabled div[role="listitem"]:hover *,
+body.wa-privacy-hover-reveal-enabled div[role="gridcell"]:hover *,
+body.wa-privacy-hover-reveal-enabled div[class*="message-"]:hover *,
+body.wa-privacy-hover-reveal-enabled div[data-testid^="msg-"]:hover *,
+body.wa-privacy-hover-reveal-enabled header:hover *,
 body.wa-privacy-hover-reveal-enabled .wa-privacy-blur-item:hover,
 body.wa-privacy-hover-reveal-enabled .wa-privacy-target-sidebar-name:hover,
 body.wa-privacy-hover-reveal-enabled .wa-privacy-target-sidebar-preview:hover,
@@ -178,11 +206,9 @@ body.wa-privacy-hover-reveal-enabled .wa-privacy-target-msg-text:hover,
 body.wa-privacy-hover-reveal-enabled .wa-privacy-target-msg-media:hover,
 body.wa-privacy-hover-reveal-enabled .wa-privacy-target-header-name:hover,
 body.wa-privacy-hover-reveal-enabled .wa-privacy-target-header-avatar:hover,
-body.wa-privacy-hover-reveal-enabled .wa-privacy-target-header-status:hover,
-body.wa-privacy-hover-reveal-enabled div[role="row"]:hover .wa-privacy-blur-item,
-body.wa-privacy-hover-reveal-enabled div[class*="message-"]:hover .wa-privacy-blur-item {
+body.wa-privacy-hover-reveal-enabled .wa-privacy-target-header-status:hover {
   filter: none !important;
   opacity: 1 !important;
   visibility: visible !important;
-  transition: filter 0.15s ease-out !important;
+  transition: filter 0.12s ease-out, opacity 0.12s ease-out !important;
 }

@@ -29,11 +29,13 @@ class WAPrivacyEngine {
     // 2. Master ON/OFF Switch
     if (!settings.enabled) {
       this.clearAllPrivacyClasses();
+      document.documentElement.style.setProperty('--wa-privacy-blur-radius', '0px');
       this.domDetector.logDebug('Privacy Shield DISABLED globally.');
       return;
     }
 
     body.classList.add(this.constants.CLASSES.ACTIVE);
+    document.documentElement.classList.add(this.constants.CLASSES.ACTIVE);
 
     // 3. Chat List / Sidebar Settings
     this.toggleBodyClass(this.constants.CLASSES.BLUR_SIDEBAR_NAMES, settings.blurSidebarNames);
@@ -75,7 +77,7 @@ class WAPrivacyEngine {
   }
 
   /**
-   * Helper to add/remove a class on document.body
+   * Helper to add/remove a class on document.body and documentElement
    */
   toggleBodyClass(className, shouldAdd) {
     if (!document.body) return;
@@ -87,12 +89,17 @@ class WAPrivacyEngine {
   }
 
   /**
-   * Remove all privacy classes from document body
+   * Remove all privacy classes from document body and documentElement
    */
   clearAllPrivacyClasses() {
-    if (!document.body) return;
-    const classes = Object.values(this.constants.CLASSES);
-    classes.forEach(cls => document.body.classList.remove(cls));
+    if (document.body) {
+      const classes = Object.values(this.constants.CLASSES);
+      classes.forEach(cls => document.body.classList.remove(cls));
+    }
+    if (document.documentElement) {
+      document.documentElement.classList.remove(this.constants.CLASSES.ACTIVE);
+      document.documentElement.classList.remove(this.constants.CLASSES.ALT_REVEAL);
+    }
   }
 
   /**
@@ -104,6 +111,9 @@ class WAPrivacyEngine {
       if (document.body) {
         document.body.classList.remove(this.constants.CLASSES.ALT_REVEAL);
       }
+      if (document.documentElement) {
+        document.documentElement.classList.remove(this.constants.CLASSES.ALT_REVEAL);
+      }
       this.isAltRevealed = false;
       return;
     }
@@ -111,14 +121,19 @@ class WAPrivacyEngine {
     if (this.isAltRevealed === isHoldingAlt) return;
     this.isAltRevealed = isHoldingAlt;
 
-    if (document.body) {
-      if (isHoldingAlt) {
-        document.body.classList.add(this.constants.CLASSES.ALT_REVEAL);
-        this.domDetector.logDebug('Temporary ALT reveal ACTIVE');
-      } else {
-        document.body.classList.remove(this.constants.CLASSES.ALT_REVEAL);
-        this.domDetector.logDebug('Temporary ALT reveal RELEASED');
-      }
+    const baseRadius = Number(this.currentSettings.blurRadius) || 10;
+    const targetRadius = isHoldingAlt ? 0 : baseRadius;
+
+    document.documentElement.style.setProperty('--wa-privacy-blur-radius', `${targetRadius}px`);
+
+    if (isHoldingAlt) {
+      if (document.body) document.body.classList.add(this.constants.CLASSES.ALT_REVEAL);
+      if (document.documentElement) document.documentElement.classList.add(this.constants.CLASSES.ALT_REVEAL);
+      this.domDetector.logDebug('Temporary ALT reveal ACTIVE (radius set to 0px)');
+    } else {
+      if (document.body) document.body.classList.remove(this.constants.CLASSES.ALT_REVEAL);
+      if (document.documentElement) document.documentElement.classList.remove(this.constants.CLASSES.ALT_REVEAL);
+      this.domDetector.logDebug(`Temporary ALT reveal RELEASED (radius restored to ${baseRadius}px)`);
     }
   }
 
