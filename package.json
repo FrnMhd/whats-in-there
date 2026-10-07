@@ -1,0 +1,29 @@
+{
+  "name": "whatsapp-privacy-shield",
+  "version": "1.0.0",
+  "description": "Smart, resilient visual privacy protection for WhatsApp Web with customizable blur and instant live reveal.",
+  "main": "background.js",
+  "scripts": {
+    "package": "node -e \"const fs=require('fs'), archiver=require('child_process'); console.log('Building package...'); const files=['manifest.json','background.js','constants.js','storage.js','dom-detector.js','privacy-engine.js','observer.js','diagnostics.js','content.js','styles.css','popup','icons','README.md','LICENSE']; require('child_process').execSync('tar -a -c -f whatsapp-privacy-shield-v1.0.0.zip ' + files.join(' ')); console.log('Created whatsapp-privacy-shield-v1.0.0.zip');\""
+  },
+  "keywords": [
+    "whatsapp",
+    "privacy",
+    "whatsapp-web",
+    "chrome-extension",
+    "blur",
+    "privacy-shield",
+    "manifest-v3",
+    "security"
+  ],
+  "author": "FrnMhd",
+  "license": "MIT",
+  "homepage": "https://github.com/FrnMhd/whats-in-there",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FrnMhd/whats-in-there.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FrnMhd/whats-in-there/issues"
+  }
+}

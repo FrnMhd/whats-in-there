@@ -1,0 +1,54 @@
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Extension Build & Release Archives
+*.zip
+*.tar.gz
+*.crx
+*.xpi
+whatsapp-privacy-shield-*.zip
+dist/
+build/
+releases/
+
+# Node & Package Managers
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+package-lock.json
+
+# IDEs and Code Editors
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+*.bak
+
+# Environment and Local Secrets
+.env
+.env.local
+.env.*.local
+
+# Temporary and Log files
+logs/
+*.log
+scratch/
+tmp/
+temp/

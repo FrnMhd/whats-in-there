@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatsApp Privacy Shield</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="logo-group">
+        <div class="logo-icon">🛡️</div>
+        <div>
+          <h1 class="popup-title">Privacy Shield</h1>
+          <span class="popup-subtitle">WhatsApp Web</span>
+        </div>
+      </div>
+      <!-- Master Switch -->
+      <label class="switch master-switch" title="Toggle All Privacy Features">
+        <input type="checkbox" id="setting-enabled">
+        <span class="slider round"></span>
+      </label>
+    </header>
+
+    <main class="popup-content" id="popup-content">
+      <!-- Chat List Section -->
+      <section class="settings-section">
+        <div class="section-header">CHAT LIST</div>
+
+        <div class="setting-row">
+          <span class="setting-label">Blur contact names</span>
+          <label class="switch">
+            <input type="checkbox" id="setting-blurSidebarNames">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <span class="setting-label">Blur message previews</span>
+          <label class="switch">
+            <input type="checkbox" id="setting-blurMessagePreview">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <span class="setting-label">Blur timestamps</span>
+          <label class="switch">
+            <input type="checkbox" id="setting-blurTimestamps">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <span class="setting-label">Blur profile pictures</span>
+          <label class="switch">
+            <input type="checkbox" id="setting-blurProfilePhotos">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <span class="setting-label">Hide profile pictures completely</span>
+          <label class="switch">
+            <input type="checkbox" id="setting-hideProfilePhotos">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <span class="setting-label">Hide unread counters</span>
+          <label class="switch">
+            <input type="checkbox" id="setting-hideUnreadCounts">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Active Chat Section -->
+      <section class="settings-section">
+        <div class="section-header">ACTIVE CHAT</div>
+
+        <div class="setting-row">
+          <span class="setting-label">Blur messages</span>
+          <label class="switch">
+            <input type="checkbox" id="setting-blurMessages">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <span class="setting-label">Blur media (images, videos, stickers)</span>
+          <label class="switch">
+            <input type="checkbox" id="setting-blurMedia">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <span class="setting-label">Blur header contact name</span>
+          <label class="switch">
+            <input type="checkbox" id="setting-blurHeader">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <span class="setting-label">Blur contact status / typing</span>
+          <label class="switch">
+            <input type="checkbox" id="setting-blurStatus">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Behavior & Reveal Section -->
+      <section class="settings-section">
+        <div class="section-header">BEHAVIOR & REVEAL</div>
+
+        <div class="setting-row">
+          <span class="setting-label">Hold <kbd>Alt</kbd> to reveal</span>
+          <label class="switch">
+            <input type="checkbox" id="setting-holdAltToReveal">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <span class="setting-label">Hover to reveal</span>
+          <label class="switch">
+            <input type="checkbox" id="setting-hoverReveal">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="slider-container">
+          <div class="slider-header">
+            <span>Blur strength</span>
+            <span id="blur-radius-value" class="slider-value">10px</span>
+          </div>
+          <input type="range" id="setting-blurRadius" min="2" max="25" value="10" class="range-slider">
+          <div class="slider-markers">
+            <span>2px</span>
+            <span>10px</span>
+            <span>25px</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shortcut & Dev Info -->
+      <div class="shortcut-box">
+        <span class="shortcut-key">Ctrl + Shift + X</span>
+        <span class="shortcut-desc">Toggle privacy anytime</span>
+      </div>
+
+      <!-- Footer / Reset -->
+      <footer class="popup-footer">
+        <button id="btn-reset" class="btn-reset" type="button">Reset to Defaults</button>
+        <div id="reset-confirm" class="reset-confirm hidden">Settings restored!</div>
+      </footer>
+    </main>
+  </div>
+
+  <script src="../constants.js"></script>
+  <script src="../storage.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

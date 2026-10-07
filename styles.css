@@ -1,0 +1,188 @@
+/**
+ * WhatsApp Privacy Shield - Stylesheet
+ * High-performance CSS filtering, zero layout shifts, and instant reveal transitions.
+ */
+
+:root {
+  --wa-privacy-blur-radius: 10px;
+  --wa-privacy-transition: filter 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+}
+
+/* =========================================================
+   0. IMMUNITY RULES (Never blur system navigation controls)
+   ========================================================= */
+/* Left navigation rail (Chats, Calls, Status, Channels, Meta AI, Settings) */
+div[role="navigation"],
+div[role="navigation"] *,
+header[data-testid="chatlist-header"] div[role="button"],
+#side > header,
+#side > header * {
+  filter: none;
+}
+
+/* =========================================================
+   1. CHAT LIST / SIDEBAR PRIVACY
+   ========================================================= */
+
+/* Contact / Sender Names in Sidebar */
+body.wa-privacy-active.wa-privacy-blur-sidebar-names .wa-privacy-target-sidebar-name,
+body.wa-privacy-active.wa-privacy-blur-sidebar-names #pane-side span[title]:not([data-icon]),
+body.wa-privacy-active.wa-privacy-blur-sidebar-names #pane-side div[data-testid="cell-frame-title"] span,
+body.wa-privacy-active.wa-privacy-blur-sidebar-names #pane-side div[role="grid"] div[role="row"] span[title] {
+  filter: blur(var(--wa-privacy-blur-radius)) !important;
+  transition: var(--wa-privacy-transition);
+}
+
+/* Last Message Previews in Sidebar */
+body.wa-privacy-active.wa-privacy-blur-sidebar-previews .wa-privacy-target-sidebar-preview,
+body.wa-privacy-active.wa-privacy-blur-sidebar-previews #pane-side [data-testid="last-msg-status"],
+body.wa-privacy-active.wa-privacy-blur-sidebar-previews #pane-side span[data-testid="last-msg"] {
+  filter: blur(var(--wa-privacy-blur-radius)) !important;
+  transition: var(--wa-privacy-transition);
+}
+
+/* Timestamps in Sidebar */
+body.wa-privacy-active.wa-privacy-blur-sidebar-timestamps .wa-privacy-target-sidebar-time {
+  filter: blur(var(--wa-privacy-blur-radius)) !important;
+  transition: var(--wa-privacy-transition);
+}
+
+/* Profile Pictures in Sidebar - BLUR MODE */
+body.wa-privacy-active.wa-privacy-blur-sidebar-avatars .wa-privacy-target-sidebar-avatar,
+body.wa-privacy-active.wa-privacy-blur-sidebar-avatars #pane-side div[role="row"] img,
+body.wa-privacy-active.wa-privacy-blur-sidebar-avatars #pane-side div[role="listitem"] img,
+body.wa-privacy-active.wa-privacy-blur-sidebar-avatars #pane-side div[role="gridcell"] img,
+body.wa-privacy-active.wa-privacy-blur-sidebar-avatars #pane-side div[data-testid="cell-frame-container"] img,
+body.wa-privacy-active.wa-privacy-blur-sidebar-avatars #pane-side div[data-testid="avatar"],
+body.wa-privacy-active.wa-privacy-blur-sidebar-avatars #pane-side img[src*="whatsapp.net"],
+body.wa-privacy-active.wa-privacy-blur-sidebar-avatars #pane-side img[src*="blob:"] {
+  filter: blur(var(--wa-privacy-blur-radius)) !important;
+  transition: var(--wa-privacy-transition);
+}
+
+/* Profile Pictures in Sidebar - HIDE MODE (Zero layout shifts) */
+body.wa-privacy-active.wa-privacy-hide-sidebar-avatars .wa-privacy-target-sidebar-avatar,
+body.wa-privacy-active.wa-privacy-hide-sidebar-avatars #pane-side div[role="row"] img,
+body.wa-privacy-active.wa-privacy-hide-sidebar-avatars #pane-side div[role="listitem"] img,
+body.wa-privacy-active.wa-privacy-hide-sidebar-avatars #pane-side div[role="gridcell"] img,
+body.wa-privacy-active.wa-privacy-hide-sidebar-avatars #pane-side div[data-testid="cell-frame-container"] img,
+body.wa-privacy-active.wa-privacy-hide-sidebar-avatars #pane-side div[data-testid="avatar"],
+body.wa-privacy-active.wa-privacy-hide-sidebar-avatars #pane-side img[src*="whatsapp.net"],
+body.wa-privacy-active.wa-privacy-hide-sidebar-avatars #pane-side img[src*="blob:"] {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  filter: none !important;
+}
+
+/* Unread Count Badges in Sidebar */
+body.wa-privacy-active.wa-privacy-hide-unread-counts .wa-privacy-target-unread-badge,
+body.wa-privacy-active.wa-privacy-hide-unread-counts #pane-side span[aria-label*="unread" i],
+body.wa-privacy-active.wa-privacy-hide-unread-counts #pane-side [data-testid="icon-unread-count"] {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* =========================================================
+   2. ACTIVE CHAT / MESSAGES PRIVACY
+   (Restricted STRICTLY to the conversation message area, NOT header or input bar)
+   ========================================================= */
+
+/* Message Text (Incoming & Outgoing) */
+body.wa-privacy-active.wa-privacy-blur-messages .wa-privacy-target-msg-text,
+body.wa-privacy-active.wa-privacy-blur-messages #main div[data-testid="conversation-panel-messages"] span.selectable-text,
+body.wa-privacy-active.wa-privacy-blur-messages #main div[data-testid="conversation-panel-messages"] div.copyable-text span,
+body.wa-privacy-active.wa-privacy-blur-messages #main div[role="application"] span.selectable-text,
+body.wa-privacy-active.wa-privacy-blur-messages #main div[class*="message-"] span.selectable-text,
+body.wa-privacy-active.wa-privacy-blur-messages #main div[class*="message-"] div.copyable-text span,
+body.wa-privacy-active.wa-privacy-blur-messages #main div[data-testid="quoted-message"] {
+  filter: blur(var(--wa-privacy-blur-radius)) !important;
+  transition: var(--wa-privacy-transition);
+}
+
+/* Message Media (Images, Videos, Stickers, GIFs, Audio waves, Document thumbnails) */
+body.wa-privacy-active.wa-privacy-blur-media .wa-privacy-target-msg-media,
+body.wa-privacy-active.wa-privacy-blur-media #main div[data-testid="conversation-panel-messages"] img:not([data-icon]):not([class*="emoji"]),
+body.wa-privacy-active.wa-privacy-blur-media #main div[data-testid="conversation-panel-messages"] video,
+body.wa-privacy-active.wa-privacy-blur-media #main div[data-testid="conversation-panel-messages"] canvas,
+body.wa-privacy-active.wa-privacy-blur-media #main div[class*="message-"] img:not([data-icon]):not([class*="emoji"]),
+body.wa-privacy-active.wa-privacy-blur-media #main div[class*="message-"] video,
+body.wa-privacy-active.wa-privacy-blur-media #main div[class*="message-"] canvas,
+body.wa-privacy-active.wa-privacy-blur-media #main div[data-testid="media-canvas"] img,
+body.wa-privacy-active.wa-privacy-blur-media #main div[data-testid="media-canvas"] video,
+body.wa-privacy-active.wa-privacy-blur-media #main div[data-testid="audio-player"],
+body.wa-privacy-active.wa-privacy-blur-media #main div[data-testid="image-thumb"],
+body.wa-privacy-active.wa-privacy-blur-media #main div[data-testid="video-thumb"],
+body.wa-privacy-active.wa-privacy-blur-media #main div[data-testid="document-thumb"] {
+  filter: blur(var(--wa-privacy-blur-radius)) !important;
+  transition: var(--wa-privacy-transition);
+}
+
+/* =========================================================
+   3. ACTIVE CHAT HEADER PRIVACY
+   ========================================================= */
+
+/* Active Contact Name / Group Title in Header */
+body.wa-privacy-active.wa-privacy-blur-header .wa-privacy-target-header-name,
+body.wa-privacy-active.wa-privacy-blur-header #main header span[title],
+body.wa-privacy-active.wa-privacy-blur-header #main header div[role="button"] span[title],
+body.wa-privacy-active.wa-privacy-blur-header header[data-testid="conversation-header"] span[title] {
+  filter: blur(var(--wa-privacy-blur-radius)) !important;
+  transition: var(--wa-privacy-transition);
+}
+
+/* Active Contact Avatar in Header - BLUR MODE */
+body.wa-privacy-active.wa-privacy-blur-header-avatar .wa-privacy-target-header-avatar,
+body.wa-privacy-active.wa-privacy-blur-header-avatar #main header img,
+body.wa-privacy-active.wa-privacy-blur-header-avatar #main header div[data-testid="avatar"] {
+  filter: blur(var(--wa-privacy-blur-radius)) !important;
+  transition: var(--wa-privacy-transition);
+}
+
+/* Active Contact Avatar in Header - HIDE MODE */
+body.wa-privacy-active.wa-privacy-hide-header-avatar .wa-privacy-target-header-avatar,
+body.wa-privacy-active.wa-privacy-hide-header-avatar #main header img,
+body.wa-privacy-active.wa-privacy-hide-header-avatar #main header div[data-testid="avatar"] {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  filter: none !important;
+}
+
+/* Active Contact Status / Typing / Last Seen / Group Subtitle in Header */
+body.wa-privacy-active.wa-privacy-blur-status .wa-privacy-target-header-status,
+body.wa-privacy-active.wa-privacy-blur-status #main header div[role="button"] + div span,
+body.wa-privacy-active.wa-privacy-blur-status #main header span[title*="online" i],
+body.wa-privacy-active.wa-privacy-blur-status #main header span[title*="typing" i] {
+  filter: blur(var(--wa-privacy-blur-radius)) !important;
+  transition: var(--wa-privacy-transition);
+}
+
+/* =========================================================
+   4. REVEAL BEHAVIORS (ALT HOLD & HOVER)
+   ========================================================= */
+
+/* Instant Reveal while holding ALT key */
+body.wa-privacy-alt-reveal * {
+  filter: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: filter 0.08s ease-out !important;
+}
+
+/* Hover-to-Reveal (when enabled in settings) */
+body.wa-privacy-hover-reveal-enabled .wa-privacy-blur-item:hover,
+body.wa-privacy-hover-reveal-enabled .wa-privacy-target-sidebar-name:hover,
+body.wa-privacy-hover-reveal-enabled .wa-privacy-target-sidebar-preview:hover,
+body.wa-privacy-hover-reveal-enabled .wa-privacy-target-sidebar-time:hover,
+body.wa-privacy-hover-reveal-enabled .wa-privacy-target-sidebar-avatar:hover,
+body.wa-privacy-hover-reveal-enabled .wa-privacy-target-msg-text:hover,
+body.wa-privacy-hover-reveal-enabled .wa-privacy-target-msg-media:hover,
+body.wa-privacy-hover-reveal-enabled .wa-privacy-target-header-name:hover,
+body.wa-privacy-hover-reveal-enabled .wa-privacy-target-header-avatar:hover,
+body.wa-privacy-hover-reveal-enabled .wa-privacy-target-header-status:hover,
+body.wa-privacy-hover-reveal-enabled div[role="row"]:hover .wa-privacy-blur-item,
+body.wa-privacy-hover-reveal-enabled div[class*="message-"]:hover .wa-privacy-blur-item {
+  filter: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: filter 0.15s ease-out !important;
+}
